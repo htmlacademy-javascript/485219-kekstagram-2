@@ -25,8 +25,8 @@
   function checkPalindrome(string) {
     const formattedString = string.replaceAll(' ', '').toLowerCase();
 
-    for (var i = 0; i < formattedString.length; i++) {
-      for (var j = formattedString.length - i - 1; j > 0; j--) {
+    for (let i = 0; i < formattedString.length; i++) {
+      for (let j = formattedString.length - i - 1; j > 0; j--) {
 
         if (formattedString[i] === formattedString[j] && j > 1) {
           break;
@@ -60,19 +60,46 @@
 
 //Задача №3. Извлечение цифр из строк.
 {
-  function parseDigitsToInt(string) {
-    let formattedString = '';
+  function parseToPositiveInt(string) {
+    let stringForloop;
+    if (typeof string === 'string') {
+      stringForloop = string;
+    } else {
+      stringForloop = string.toString();
+    }
 
-    for (var i = 0; i < string.length; i++) {
-      if (!isNaN(parseInt(string[i], 10))) {
-        formattedString += string[i];
+    let formattedString = '';
+    for (let i = 0; i < stringForloop.length; i++) {
+      if (!isNaN(parseInt(stringForloop[i], 10))) {
+        formattedString += stringForloop[i];
       }
     }
 
-    return formattedString;
+    return formattedString !== '' ? +formattedString : NaN;
   }
 
-  console.log(parseDigitsToInt('12vb4'));
-  console.log();
+  console.log('\n--- Тесты для extractNumber---');
+  console.log(
+    `Аргумент начинается с числа: ${parseToPositiveInt('2023 год') === 2023}`
+  );
+  console.log(
+    `Аргумент заканчивается на число: ${
+      parseToPositiveInt('ECMAScript 2022') === 2022
+    }`
+  );
+  console.log(
+    `Аргумент содержит несколько чисел, в том числе и с плавющей точкой: ${
+      parseToPositiveInt('1 кефир, 0.5 батона') === 105
+    }`
+  );
+  console.log(
+    `Аргумент закначивается на число с нолями: ${
+      parseToPositiveInt('агент 007') === 7
+    }`
+  );
+  console.log(`Аргумент строка без чисел: ${isNaN(parseToPositiveInt('а я томат'))}`);
+  console.log(`Аргумент число: ${parseToPositiveInt(2023) === 2023}`);
+  console.log(`Аргумент отрицательное число: ${parseToPositiveInt(-1) === 1}`);
+  console.log(`Аргумент число с плавющей точкой: ${parseToPositiveInt(1.5) === 15}`);
 }
 
