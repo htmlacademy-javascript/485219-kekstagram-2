@@ -20,18 +20,11 @@ console.log(
 function checkPalindrome(string) {
   const formattedString = string.replaceAll(' ', '').toLowerCase();
 
-  for (let i = 0; i < formattedString.length; i++) {
-    for (let j = formattedString.length - i - 1; j > 0; j--) {
-
-      if (formattedString[i] === formattedString[j] && j > 1) {
-        break;
-      } else if (formattedString[i] === formattedString[j]) {
-        return true;
-      }
-
-      return false;
-    }
+  let reverseString = '';
+  for (let i = formattedString.length - 1; i >= 0; i--) {
+    reverseString += formattedString[i];
   }
+  return reverseString === formattedString;
 }
 
 console.log('\n--- Тесты для checkPalindrome ---');
@@ -52,12 +45,7 @@ console.log(
 
 //Задача №3. Извлечение цифр из строк.
 function parseToPositiveInt(string) {
-  let stringForloop;
-  if (typeof string === 'string') {
-    stringForloop = string;
-  } else {
-    stringForloop = string.toString();
-  }
+  const stringForloop = string.toString();
 
   let formattedString = '';
   for (let i = 0; i < stringForloop.length; i++) {
