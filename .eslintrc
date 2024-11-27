@@ -14,8 +14,3 @@ globals:
 
 extends:
   "htmlacademy/vanilla"
-
-rules: {
-  'no-console': 'off',
-  "no-inner-declarations":[0, "always"]
-}
