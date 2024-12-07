@@ -2,6 +2,8 @@ const objectsCount = 26;
 const maxCommentsCount = 30;
 const avatarsCount = 6;
 const maxSentencesCount = 2;
+const minLikesCount = 15;
+const maxLikesCount = 200;
 
 const photoDescriptions = [
   'Закат над океаном', 'Густой лес в тумане', 'Старая каменная башня', 'Поле с подсолнухами',
@@ -59,7 +61,7 @@ function getRandomObjects(count, getRandomInt, getUniqueVal, createNewPhotoObjec
     const photoId = getUniquePhotoIdValue();
     const url = getUniqueUrlValue();
     const description = descriptions[getRandomInt(0, descriptions.length)];
-    const likes = getRandomInt(15, 200);
+    const likes = getRandomInt(minLikesCount, maxLikesCount);
 
     objects.push(
       createNewPhotoObject(
