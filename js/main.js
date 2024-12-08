@@ -25,7 +25,7 @@ const LIKES_COUNT = {
 
 const RANDOM_VALUE = {
   MIN: 0,
-  MAX: Number.MAX_VALUE
+  MAX: 100000
 };
 
 const PHOTO_DESCRIPTIONS = ['Закат над океаном',
@@ -55,20 +55,12 @@ function getRandomPhotoObjects({ photoGeneratorParameters }) {
     paramCount,
     paramGetRandomInteger,
     paramGetUniqueValue,
-    paramGetRandomArrayElements,
     paramDescriptions,
-    paramRandomValue,
     paramObjectsCount,
-    paramCommentsCount,
-    paramAvatarsCount,
-    paramSentencesCount,
     paramLikesCount,
-    paramMessages,
-    paramNames
   } = photoGeneratorParameters;
 
   const objects = [];
-  const getUniqueCommentIdValue = paramGetUniqueValue(paramGetRandomInteger, paramRandomValue.MIN, paramRandomValue.MAX);
   const getUniquePhotoIdValue = paramGetUniqueValue(paramGetRandomInteger, paramObjectsCount.MIN, paramObjectsCount.MAX);
   const getUniqueUrlValue = paramGetUniqueValue(paramGetRandomInteger, paramObjectsCount.MIN, paramObjectsCount.MAX);
 
@@ -164,4 +156,3 @@ const parameters = {
 };
 
 const generatedObjects = getRandomPhotoObjects({photoGeneratorParameters: parameters});
-console.log(generatedObjects);
