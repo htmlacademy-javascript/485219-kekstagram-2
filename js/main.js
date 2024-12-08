@@ -1,4 +1,6 @@
 import {getRandomPhotoObjects} from './photos.js';
 
-const generatedObjects = getRandomPhotoObjects();
+const OBJECTS_COUNT = 26;
+
+const generatedObjects = getRandomPhotoObjects(OBJECTS_COUNT);
 console.log(generatedObjects);
