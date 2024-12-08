@@ -74,22 +74,7 @@ function getRandomPhotoObjects({ photoGeneratorParameters }) {
 
 
   for (let i = 0; i < paramCount; i++) {
-    const comments = [];
-    const commentsCount = paramGetRandomInteger(paramCommentsCount.MIN, paramCommentsCount.MAX);
-
-    for (let j = 0; j < commentsCount; j++) {
-      const commentId = getUniqueCommentIdValue();
-      const avatar = paramGetRandomInteger(paramAvatarsCount.MIN, paramAvatarsCount.MAX);
-      const commentsList = paramGetRandomArrayElements(paramMessages, paramGetRandomInteger, paramSentencesCount.MAX);
-      const name = paramGetRandomArrayElements(paramNames, paramGetRandomInteger);
-
-      comments.push({
-        commentId,
-        avatar,
-        commentsList,
-        name
-      });
-    }
+    const comments = getRandomComments();
 
     const photoId = getUniquePhotoIdValue();
     const url = getUniqueUrlValue();
@@ -106,6 +91,27 @@ function getRandomPhotoObjects({ photoGeneratorParameters }) {
   }
 
   return objects;
+}
+
+function getRandomComments() {
+  const comments = [];
+  const getUniqueCommentIdValue = getUniqueValue(getRandomInteger, RANDOM_VALUE.MIN, RANDOM_VALUE.MAX);
+  const commentsCount = getRandomInteger(COMMENTS_COUNT.MIN, COMMENTS_COUNT.MAX);
+
+  for (let j = 0; j < commentsCount; j++) {
+    const commentId = getUniqueCommentIdValue();
+    const avatar = `img/avatar-${getRandomInteger(AVATARS_COUNT.MIN, AVATARS_COUNT.MAX)}.svg`;
+    const commentsList = getRandomArrayElements(MESSAGES, getRandomInteger, SENTENCES_COUNT.MAX);
+    const name = getRandomArrayElements(NAMES, getRandomInteger);
+
+    comments.push({
+      commentId,
+      avatar,
+      commentsList,
+      name
+    });
+  }
+  return comments;
 }
 
 function getUniqueValue(getRandomInt, min, max) {
@@ -158,3 +164,4 @@ const parameters = {
 };
 
 const generatedObjects = getRandomPhotoObjects({photoGeneratorParameters: parameters});
+console.log(generatedObjects);
