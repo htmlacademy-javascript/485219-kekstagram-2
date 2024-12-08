@@ -1,4 +1,4 @@
-function getUniqueValue(getRandomInt, min, max) {
+function generateUniqueInteger(getRandomInt, min, max) {
   const previousValues = [];
 
   return function () {
@@ -28,7 +28,8 @@ function getRandomInteger(min, max) {
   const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
   const result = Math.random() * (upper - lower + 1) + lower;
 
-  return Math.floor(result);
+  const floorResult = Math.floor(result);
+  return floorResult;
 }
 
-export {getUniqueValue, getRandomInteger, getRandomArrayElements};
+export {generateUniqueInteger, getRandomInteger, getRandomArrayElements};

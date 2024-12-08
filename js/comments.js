@@ -1,4 +1,4 @@
-import {getUniqueValue, getRandomInteger, getRandomArrayElements} from './util.js';
+import {generateUniqueInteger, getRandomInteger, getRandomArrayElements} from './util.js';
 
 const COMMENTS_COUNT = {
   MIN: 0,
@@ -17,7 +17,7 @@ const SENTENCES_COUNT = {
 
 const RANDOM_RANGE = {
   MIN: 0,
-  MAX: Number.MAX_VALUE
+  MAX: 10000
 };
 
 const MESSAGES = ['Всё отлично! В целом всё неплохо. Но не всё.',
@@ -32,7 +32,7 @@ const NAMES = ['Алексей', 'Мария', 'Иван', 'Екатерина',
 
 function getRandomComments() {
   const comments = [];
-  const getUniqueCommentIdValue = getUniqueValue(getRandomInteger, RANDOM_RANGE.MIN, RANDOM_RANGE.MAX);
+  const getUniqueCommentIdValue = generateUniqueInteger(getRandomInteger, RANDOM_RANGE.MIN, RANDOM_RANGE.MAX);
   const commentsCount = getRandomInteger(COMMENTS_COUNT.MIN, COMMENTS_COUNT.MAX);
 
   for (let j = 0; j < commentsCount; j++) {

@@ -1,4 +1,4 @@
-import {getUniqueValue, getRandomInteger} from './util.js';
+import {generateUniqueInteger, getRandomInteger} from './util.js';
 import {getRandomComments} from './comments.js';
 
 const OBJECTS_COUNT = 26;
@@ -8,9 +8,14 @@ const LIKES_COUNT = {
   MAX: 200
 };
 
-const RANDOM_RANGE = {
-  MIN: 0,
-  MAX: Number.MAX_VALUE
+const ID_RANGE = {
+  MIN: 1,
+  MAX: 25
+};
+
+const URL_RANGE = {
+  MIN: 1,
+  MAX: 25
 };
 
 const PHOTO_DESCRIPTIONS = ['Закат над океаном',
@@ -27,15 +32,15 @@ const PHOTO_DESCRIPTIONS = ['Закат над океаном',
 
 function getRandomPhotoObjects() {
   const objects = [];
-  const getUniquePhotoIdValue = getUniqueValue(getRandomInteger, RANDOM_RANGE.MIN, RANDOM_RANGE.MAX);
-  const getUniqueUrlValue = getUniqueValue(getRandomInteger, RANDOM_RANGE.MIN, RANDOM_RANGE.MAX);
+  const getUniquePhotoIdValue = generateUniqueInteger(getRandomInteger, ID_RANGE.MIN, ID_RANGE.MAX);
+  const getUniqueUrlValue = generateUniqueInteger(getRandomInteger, URL_RANGE.MIN, URL_RANGE.MAX);
 
-  for (let i = 0; i < OBJECTS_COUNT; i++) {
+  for (let i = 0; i < OBJECTS_COUNT - 1; i++) {
     const comments = getRandomComments();
 
     const photoId = getUniquePhotoIdValue();
     const url = `photos/${getUniqueUrlValue()}.jpg`;
-    const description = PHOTO_DESCRIPTIONS[getRandomInteger(0, PHOTO_DESCRIPTIONS.length)];
+    const description = PHOTO_DESCRIPTIONS[getRandomInteger(0, PHOTO_DESCRIPTIONS.length - 1)];
     const likes = getRandomInteger(LIKES_COUNT.MIN, LIKES_COUNT.MAX);
 
     objects.push({
