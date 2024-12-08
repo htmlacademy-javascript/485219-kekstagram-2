@@ -27,4 +27,3 @@ function parseToPositiveInt(string) {
 
   return formattedString !== '' ? +formattedString : NaN;
 }
-

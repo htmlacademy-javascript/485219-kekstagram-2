@@ -86,4 +86,4 @@ function getRandomPhotoObjects({ photoGeneratorParameters }) {
   return objects;
 }
 
-export {getUniqueValue, getRandomArrayElements, getRandomInteger, getRandomPhotoObjects};
+export {getRandomPhotoObjects};
