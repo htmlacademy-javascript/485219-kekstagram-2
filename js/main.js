@@ -28,7 +28,7 @@ const RANDOM_VALUE = {
   MAX: Number.MAX_VALUE
 };
 
-const photoDescriptions = ['Закат над океаном',
+const PHOTO_DESCRIPTIONS = ['Закат над океаном',
   'Густой лес в тумане', 'Старая каменная башня', 'Поле с подсолнухами', 'Заснеженные горы на рассвете',
   'Уличное кафе в Париже', 'Тихий пляж с белым песком', 'Пейзаж с речкой и мостиком', 'Яркий фейерверк ночью',
   'Городская улица в дождь', 'Цветущий сад весной', 'Корабль в открытом море', 'Тропа в осеннем лесу',
@@ -40,14 +40,14 @@ const photoDescriptions = ['Закат над океаном',
   'Маленькая хижина в горах', 'Закат в тропиках', 'Стадо оленей на рассвете', 'Городской парк с фонтаном',
   'Облачный горизонт над мегаполисом', 'Гребной канал с лодками', 'Старинный замок в горах'];
 
-const messages = ['Всё отлично! В целом всё неплохо. Но не всё.',
+const MESSAGES = ['Всё отлично! В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
   'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают.', 'Как можно было поймать такой неудачный момент?!'];
 
 
-const names = ['Алексей', 'Мария', 'Иван', 'Екатерина', 'Дмитрий', 'Ольга', 'Николай', 'Анна', 'Сергей', 'Елена',
+const NAMES = ['Алексей', 'Мария', 'Иван', 'Екатерина', 'Дмитрий', 'Ольга', 'Николай', 'Анна', 'Сергей', 'Елена',
   'Владимир', 'Татьяна', 'Артур', 'Наталья', 'Павел', 'Ирина', 'Кирилл', 'Светлана', 'Максим', 'Юлия'];
 
 function getRandomPhotoObjects({ photoGeneratorParameters }) {
@@ -62,7 +62,9 @@ function getRandomPhotoObjects({ photoGeneratorParameters }) {
     paramCommentsCount,
     paramAvatarsCount,
     paramSentencesCount,
-    paramLikesCount
+    paramLikesCount,
+    paramMessages,
+    paramNames
   } = photoGeneratorParameters;
 
   const objects = [];
@@ -78,8 +80,8 @@ function getRandomPhotoObjects({ photoGeneratorParameters }) {
     for (let j = 0; j < commentsCount; j++) {
       const commentId = getUniqueCommentIdValue();
       const avatar = paramGetRandomInteger(paramAvatarsCount.MIN, paramAvatarsCount.MAX);
-      const commentsList = paramGetRandomArrayElements(messages, paramGetRandomInteger, paramSentencesCount.MAX);
-      const name = paramGetRandomArrayElements(names, paramGetRandomInteger);
+      const commentsList = paramGetRandomArrayElements(paramMessages, paramGetRandomInteger, paramSentencesCount.MAX);
+      const name = paramGetRandomArrayElements(paramNames, paramGetRandomInteger);
 
       comments.push({
         commentId,
@@ -144,13 +146,15 @@ const parameters = {
   paramGetRandomInteger: getRandomInteger,
   paramGetUniqueValue: getUniqueValue,
   paramGetRandomArrayElements: getRandomArrayElements,
-  paramDescriptions: photoDescriptions,
+  paramDescriptions: PHOTO_DESCRIPTIONS,
   paramRandomValue: RANDOM_VALUE,
   paramObjectsCount: OBJECTS_COUNT,
   paramCommentsCount: COMMENTS_COUNT,
   paramAvatarsCount: AVATARS_COUNT,
   paramSentencesCount: SENTENCES_COUNT,
-  paramLikesCount: LIKES_COUNT
+  paramLikesCount: LIKES_COUNT,
+  paramMessages: MESSAGES,
+  paramNames: NAMES
 };
 
 const generatedObjects = getRandomPhotoObjects({photoGeneratorParameters: parameters});
