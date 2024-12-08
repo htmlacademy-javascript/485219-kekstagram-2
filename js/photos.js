@@ -1,29 +1,14 @@
-const OBJECTS_COUNT = {
-  MIN: 0,
-  MAX: 26
-};
+import {getUniqueValue, getRandomInteger} from './util.js';
+import {getRandomComments} from './comments.js';
 
-const COMMENTS_COUNT = {
-  MIN: 0,
-  MAX: 30
-};
-
-const AVATARS_COUNT = {
-  MIN: 0,
-  MAX: 6
-};
-
-const SENTENCES_COUNT = {
-  MIN: 0,
-  MAX: 4
-};
+const OBJECTS_COUNT = 26;
 
 const LIKES_COUNT = {
   MIN: 15,
   MAX: 200
 };
 
-const RANDOM_VALUE = {
+const RANDOM_RANGE = {
   MIN: 0,
   MAX: Number.MAX_VALUE
 };
@@ -40,17 +25,29 @@ const PHOTO_DESCRIPTIONS = ['Закат над океаном',
   'Маленькая хижина в горах', 'Закат в тропиках', 'Стадо оленей на рассвете', 'Городской парк с фонтаном',
   'Облачный горизонт над мегаполисом', 'Гребной канал с лодками', 'Старинный замок в горах'];
 
-const MESSAGES = ['Всё отлично! В целом всё неплохо. Но не всё.',
-  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают.', 'Как можно было поймать такой неудачный момент?!'];
+function getRandomPhotoObjects() {
+  const objects = [];
+  const getUniquePhotoIdValue = getUniqueValue(getRandomInteger, RANDOM_RANGE.MIN, RANDOM_RANGE.MAX);
+  const getUniqueUrlValue = getUniqueValue(getRandomInteger, RANDOM_RANGE.MIN, RANDOM_RANGE.MAX);
 
+  for (let i = 0; i < OBJECTS_COUNT; i++) {
+    const comments = getRandomComments();
 
-const NAMES = ['Алексей', 'Мария', 'Иван', 'Екатерина', 'Дмитрий', 'Ольга', 'Николай', 'Анна', 'Сергей', 'Елена',
-  'Владимир', 'Татьяна', 'Артур', 'Наталья', 'Павел', 'Ирина', 'Кирилл', 'Светлана', 'Максим', 'Юлия'];
+    const photoId = getUniquePhotoIdValue();
+    const url = `photos/${getUniqueUrlValue()}.jpg`;
+    const description = PHOTO_DESCRIPTIONS[getRandomInteger(0, PHOTO_DESCRIPTIONS.length)];
+    const likes = getRandomInteger(LIKES_COUNT.MIN, LIKES_COUNT.MAX);
 
-export {
-  OBJECTS_COUNT, COMMENTS_COUNT, AVATARS_COUNT, SENTENCES_COUNT, LIKES_COUNT, RANDOM_VALUE,
-  PHOTO_DESCRIPTIONS, MESSAGES, NAMES
-};
+    objects.push({
+      photoId,
+      url,
+      description,
+      likes,
+      comments
+    });
+  }
+
+  return objects;
+}
+
+export {getRandomPhotoObjects};
