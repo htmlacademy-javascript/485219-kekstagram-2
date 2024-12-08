@@ -50,7 +50,7 @@ const messages = ['Всё отлично! В целом всё неплохо. �
 const names = ['Алексей', 'Мария', 'Иван', 'Екатерина', 'Дмитрий', 'Ольга', 'Николай', 'Анна', 'Сергей', 'Елена',
   'Владимир', 'Татьяна', 'Артур', 'Наталья', 'Павел', 'Ирина', 'Кирилл', 'Светлана', 'Максим', 'Юлия'];
 
-function getRandomPhotoObjects({ objectParameters }) {
+function getRandomPhotoObjects({ photoGeneratorParameters }) {
   const {
     paramCount,
     paramGetRandomInteger,
@@ -63,7 +63,7 @@ function getRandomPhotoObjects({ objectParameters }) {
     paramAvatarsCount,
     paramSentencesCount,
     paramLikesCount
-  } = objectParameters;
+  } = photoGeneratorParameters;
 
   const objects = [];
   const getUniqueCommentIdValue = paramGetUniqueValue(paramGetRandomInteger, paramRandomValue.MIN, paramRandomValue.MAX);
@@ -153,6 +153,6 @@ const parameters = {
   paramLikesCount: LIKES_COUNT
 };
 
-const generatedObjects = getRandomPhotoObjects({objectParameters: parameters});
+const generatedObjects = getRandomPhotoObjects({photoGeneratorParameters: parameters});
 console.log(generatedObjects);
 
