@@ -57,7 +57,7 @@ function getRandomPhotoObjects({ photoGeneratorParameters }) {
 
     for (let j = 0; j < commentsCount; j++) {
       const commentId = getUniqueCommentIdValue();
-      const avatar = getRandomInteger(paramAvatarsCount.MIN, paramAvatarsCount.MAX);
+      const avatar = `img/avatar-${getRandomInteger(paramAvatarsCount.MIN, paramAvatarsCount.MAX)}.svg`;
       const commentsList = getRandomArrayElements(paramMessages, getRandomInteger, paramSentencesCount.MAX);
       const name = getRandomArrayElements(paramNames, getRandomInteger);
 
@@ -70,7 +70,7 @@ function getRandomPhotoObjects({ photoGeneratorParameters }) {
     }
 
     const photoId = getUniquePhotoIdValue();
-    const url = getUniqueUrlValue();
+    const url = `photos/${getUniqueUrlValue()}.jpg`;
     const description = paramDescriptions[getRandomInteger(0, paramDescriptions.length)];
     const likes = getRandomInteger(paramLikesCount.MIN, paramLikesCount.MAX);
 
