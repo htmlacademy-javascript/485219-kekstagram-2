@@ -19,6 +19,6 @@ const parameters = {
 };
 
 const generatedObjects = getRandomPhotoObjects({photoGeneratorParameters: parameters});
-console.log(generatedObjects);
+
 
 
