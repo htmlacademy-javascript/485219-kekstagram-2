@@ -4,13 +4,13 @@ const picturesContainer = document.querySelector('.pictures');
 function showThumbnail(randomPhotoObjects) {
   const fragment = document.createDocumentFragment();
 
-  randomPhotoObjects.forEach((object) => {
+  randomPhotoObjects.forEach(({url, description, likes, comments }) => {
     const newThumbnail = thumbnailTemplate.cloneNode(true);
 
-    newThumbnail.querySelector('img').src = object.url;
-    newThumbnail.querySelector('img').alt = object.description;
-    newThumbnail.querySelector('.picture__comments').textContent = object.comments.length;
-    newThumbnail.querySelector('.picture__likes').textContent = object.likes;
+    newThumbnail.querySelector('img').src = url;
+    newThumbnail.querySelector('img').alt = description;
+    newThumbnail.querySelector('.picture__comments').textContent = comments.length;
+    newThumbnail.querySelector('.picture__likes').textContent = likes;
 
     fragment.appendChild(newThumbnail);
   });
