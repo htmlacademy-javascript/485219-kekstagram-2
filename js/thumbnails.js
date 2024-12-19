@@ -5,14 +5,14 @@ function showThumbnail(randomPhotoObjects) {
   const fragment = document.createDocumentFragment();
 
   randomPhotoObjects.forEach(({url, description, likes, comments }) => {
-    const newThumbnail = pictureTemplateElement.cloneNode(true);
+    const pictureElement = pictureTemplateElement.cloneNode(true);
 
-    newThumbnail.querySelector('img').src = url;
-    newThumbnail.querySelector('img').alt = description;
-    newThumbnail.querySelector('.picture__comments').textContent = comments.length;
-    newThumbnail.querySelector('.picture__likes').textContent = likes;
+    pictureElement.querySelector('img').src = url;
+    pictureElement.querySelector('img').alt = description;
+    pictureElement.querySelector('.picture__comments').textContent = comments.length;
+    pictureElement.querySelector('.picture__likes').textContent = likes;
 
-    fragment.appendChild(newThumbnail);
+    fragment.appendChild(pictureElement);
   });
 
   picturesContainer.appendChild(fragment);
