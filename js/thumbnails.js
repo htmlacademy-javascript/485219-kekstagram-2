@@ -1,11 +1,11 @@
-const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const pictureTemplateElement = document.querySelector('#picture').content.querySelector('.picture');
 const picturesContainer = document.querySelector('.pictures');
 
 function showThumbnail(randomPhotoObjects) {
   const fragment = document.createDocumentFragment();
 
   randomPhotoObjects.forEach(({url, description, likes, comments }) => {
-    const newThumbnail = thumbnailTemplate.cloneNode(true);
+    const newThumbnail = pictureTemplateElement.cloneNode(true);
 
     newThumbnail.querySelector('img').src = url;
     newThumbnail.querySelector('img').alt = description;
