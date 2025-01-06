@@ -1,5 +1,6 @@
 const pictureTemplateElement = document.querySelector('#picture').content.querySelector('.picture');
 const picturesContainer = document.querySelector('.pictures');
+const thumbnailsReadyEvent = new Event('thumbnailsIsReady');
 
 function showThumbnail(randomPhotoObjects) {
   const fragment = document.createDocumentFragment();
@@ -14,9 +15,12 @@ function showThumbnail(randomPhotoObjects) {
     pictureElement.querySelector('.picture__likes').textContent = likes;
 
     fragment.appendChild(pictureElement);
+    // console.log(pictureElement);
   });
 
   picturesContainer.appendChild(fragment);
+
+  picturesContainer.dispatchEvent(thumbnailsReadyEvent);
 }
 
 export {showThumbnail};
