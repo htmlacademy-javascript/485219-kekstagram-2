@@ -28,7 +28,7 @@ const PHOTO_DESCRIPTIONS = ['Закат над океаном',
   'Маленькая хижина в горах', 'Закат в тропиках', 'Стадо оленей на рассвете', 'Городской парк с фонтаном',
   'Облачный горизонт над мегаполисом', 'Гребной канал с лодками', 'Старинный замок в горах'];
 
-function getRandomPhotoObjects(objectsCount) {
+const photoData = (function getPhotoData(objectsCount) {
   const objects = [];
   const getUniquePhotoIdValue = generateUniqueInteger(getRandomInteger, ID_RANGE.MIN, ID_RANGE.MAX);
   const getUniqueUrlValue = generateUniqueInteger(getRandomInteger, URL_RANGE.MIN, URL_RANGE.MAX);
@@ -51,6 +51,6 @@ function getRandomPhotoObjects(objectsCount) {
   }
 
   return objects;
-}
+})(26);
 
-export {getRandomPhotoObjects};
+export {photoData};

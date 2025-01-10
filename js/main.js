@@ -1,10 +1,11 @@
-import {getRandomPhotoObjects} from './photos.js';
+import './data.js';
 import {showThumbnail} from './thumbnails.js';
-import {photoObjects} from './render-big-photo.js';
+import './bigPhotoViewer.js';
 
-const OBJECTS_COUNT = 26;
-
-const randomPhotoObjects = getRandomPhotoObjects(OBJECTS_COUNT);
-photoObjects = randomPhotoObjects;
-
-showThumbnail(randomPhotoObjects);
+showThumbnail();
+// const OBJECTS_COUNT = 26;
+//
+// const randomPhotoObjects = getPhotoData(OBJECTS_COUNT);
+// photoObjects = randomPhotoObjects;
+//
+// showThumbnail(randomPhotoObjects);

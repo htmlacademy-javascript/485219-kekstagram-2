@@ -1,11 +1,13 @@
+import {photoData} from './data.js';
+
 const pictureTemplateElement = document.querySelector('#picture').content.querySelector('.picture');
 const picturesContainer = document.querySelector('.pictures');
-const thumbnailsReadyEvent = new Event('thumbnailsIsReady');
+// const thumbnailsReadyEvent = new Event('thumbnailsIsReady');
 
-function showThumbnail(randomPhotoObjects) {
+function showThumbnail() {
   const fragment = document.createDocumentFragment();
 
-  randomPhotoObjects.forEach(({photoId ,url, description, likes, comments }) => {
+  photoData.forEach(({photoId ,url, description, likes, comments }) => {
     const pictureElement = pictureTemplateElement.cloneNode(true);
 
     pictureElement.dataset.photoId = photoId;
@@ -15,12 +17,11 @@ function showThumbnail(randomPhotoObjects) {
     pictureElement.querySelector('.picture__likes').textContent = likes;
 
     fragment.appendChild(pictureElement);
-    // console.log(pictureElement);
   });
 
   picturesContainer.appendChild(fragment);
 
-  picturesContainer.dispatchEvent(thumbnailsReadyEvent);
+  // picturesContainer.dispatchEvent(thumbnailsReadyEvent);
 }
 
 export {showThumbnail};
