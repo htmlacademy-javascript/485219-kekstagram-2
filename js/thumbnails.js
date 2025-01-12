@@ -2,7 +2,6 @@ import {photoData} from './data.js';
 
 const pictureTemplateElement = document.querySelector('#picture').content.querySelector('.picture');
 const picturesContainer = document.querySelector('.pictures');
-// const thumbnailsReadyEvent = new Event('thumbnailsIsReady');
 
 function showThumbnail() {
   const fragment = document.createDocumentFragment();
@@ -20,8 +19,6 @@ function showThumbnail() {
   });
 
   picturesContainer.appendChild(fragment);
-
-  // picturesContainer.dispatchEvent(thumbnailsReadyEvent);
 }
 
 export {showThumbnail};

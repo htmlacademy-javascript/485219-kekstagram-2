@@ -6,13 +6,13 @@ const COMMENTS_COUNT = {
 };
 
 const AVATARS_COUNT = {
-  MIN: 0,
+  MIN: 1,
   MAX: 6
 };
 
 const SENTENCES_COUNT = {
   MIN: 0,
-  MAX: 4
+  MAX: 2
 };
 
 const RANDOM_RANGE = {
