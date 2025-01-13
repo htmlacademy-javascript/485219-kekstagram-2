@@ -14,7 +14,7 @@ picturesContainerElement.addEventListener('click', (evt) => {
   bigPhotoElement.querySelector('.social__comment-count').classList.add('hidden');
   bigPhotoElement.querySelector('.comments-loader').classList.add('hidden');
 
-  bigPhotoElement.querySelector('img').setAttribute('src', url);
+  bigPhotoElement.querySelector('.big-picture__img img').setAttribute('src', url);
   bigPhotoElement.querySelector('.likes-count').textContent = likes;
   bigPhotoElement.querySelector('.social__comment-total-count').textContent = comments.length;
   bigPhotoElement.querySelector('.social__caption').textContent = description;

@@ -28,33 +28,6 @@ const PHOTO_DESCRIPTIONS = ['Закат над океаном',
   'Маленькая хижина в горах', 'Закат в тропиках', 'Стадо оленей на рассвете', 'Городской парк с фонтаном',
   'Облачный горизонт над мегаполисом', 'Гребной канал с лодками', 'Старинный замок в горах'];
 
-let photoData = [];
-
-// const photoData = (function getPhotoData(objectsCount) {
-//   const objects = [];
-//   const getUniquePhotoIdValue = generateUniqueInteger(getRandomInteger, ID_RANGE.MIN, ID_RANGE.MAX);
-//   const getUniqueUrlValue = generateUniqueInteger(getRandomInteger, URL_RANGE.MIN, URL_RANGE.MAX);
-//
-//   for (let i = 0; i < objectsCount - 1; i++) {
-//     const comments = getRandomComments();
-//
-//     const photoId = getUniquePhotoIdValue();
-//     const url = `photos/${getUniqueUrlValue()}.jpg`;
-//     const description = PHOTO_DESCRIPTIONS[getRandomInteger(0, PHOTO_DESCRIPTIONS.length - 1)];
-//     const likes = getRandomInteger(LIKES_COUNT.MIN, LIKES_COUNT.MAX);
-//
-//     objects.push({
-//       photoId,
-//       url,
-//       description,
-//       likes,
-//       comments
-//     });
-//   }
-//
-//   return objects;
-// })(26);
-
 function getPhotoData(objectsCount) {
   const objects = [];
   const getUniquePhotoIdValue = generateUniqueInteger(getRandomInteger, ID_RANGE.MIN, ID_RANGE.MAX);
@@ -80,8 +53,4 @@ function getPhotoData(objectsCount) {
   return objects;
 }
 
-function generateMockData(count) {
-  photoData = getPhotoData(count);
-}
-
-export {photoData, generateMockData};
+export {getPhotoData};
