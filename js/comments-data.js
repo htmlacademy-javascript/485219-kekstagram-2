@@ -11,7 +11,7 @@ const AVATARS_COUNT = {
 };
 
 const SENTENCES_COUNT = {
-  MIN: 0,
+  MIN: 1,
   MAX: 2
 };
 

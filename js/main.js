@@ -1,5 +1,8 @@
-import './data.js';
+import {photoData, generateMockData} from './data.js';
 import {showThumbnail} from './thumbnails.js';
-import './bigPhotoViewer.js';
+import {setPhotoData} from './big-photo-viewer.js';
 
-showThumbnail();
+generateMockData(26);
+showThumbnail(photoData);
+setPhotoData(photoData);
+
