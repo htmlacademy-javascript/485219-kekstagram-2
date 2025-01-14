@@ -1,21 +1,21 @@
 import {generateUniqueInteger, getRandomInteger, getRandomArrayElements} from './util.js';
 
-const COMMENTS_COUNT = {
+const CommentsCount = {
   MIN: 0,
   MAX: 30
 };
 
-const AVATARS_COUNT = {
+const AvatarsCount = {
   MIN: 1,
   MAX: 6
 };
 
-const SENTENCES_COUNT = {
+const SentencesCount = {
   MIN: 1,
   MAX: 2
 };
 
-const RANDOM_RANGE = {
+const RandomRange = {
   MIN: 0,
   MAX: 10000
 };
@@ -32,13 +32,13 @@ const NAMES = ['Алексей', 'Мария', 'Иван', 'Екатерина',
 
 function getRandomComments() {
   const comments = [];
-  const getUniqueCommentIdValue = generateUniqueInteger(getRandomInteger, RANDOM_RANGE.MIN, RANDOM_RANGE.MAX);
-  const commentsCount = getRandomInteger(COMMENTS_COUNT.MIN, COMMENTS_COUNT.MAX);
+  const getUniqueCommentIdValue = generateUniqueInteger(getRandomInteger, RandomRange.MIN, RandomRange.MAX);
+  const commentsCount = getRandomInteger(CommentsCount.MIN, CommentsCount.MAX);
 
   for (let j = 0; j < commentsCount; j++) {
     const commentId = getUniqueCommentIdValue();
-    const avatar = `img/avatar-${getRandomInteger(AVATARS_COUNT.MIN, AVATARS_COUNT.MAX)}.svg`;
-    const commentsList = getRandomArrayElements(MESSAGES, getRandomInteger, SENTENCES_COUNT.MAX);
+    const avatar = `img/avatar-${getRandomInteger(AvatarsCount.MIN, AvatarsCount.MAX)}.svg`;
+    const commentsList = getRandomArrayElements(MESSAGES, getRandomInteger, SentencesCount.MAX);
     const name = getRandomArrayElements(NAMES, getRandomInteger);
 
     comments.push({
