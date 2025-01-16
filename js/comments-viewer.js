@@ -22,11 +22,11 @@ function fillCommentsList(comments) {
     for (let i = 0; i < commentsToLoad; i++) {
       addCommentAndUpdateCounter(commentsArray[i]);
     }
-    updateLoadCommentsButtonVisibility();
+    loadCommentsButtonElement.classList.toggle('hidden', currentCommentsLoaded >= totalComments);
   } else {
     loadCommentElement.innerHTML = '';
     loadCommentElement.textContent = 'Нет комментариев';
-    updateLoadCommentsButtonVisibility();
+    loadCommentsButtonElement.classList.toggle('hidden', currentCommentsLoaded >= totalComments);
   }
 }
 
@@ -36,11 +36,10 @@ function loadMoreComments() {
   for (let i = 0; i < commentsToLoad; i++) {
     addCommentAndUpdateCounter(commentsArray[currentCommentsLoaded]);
   }
-  updateLoadCommentsButtonVisibility();
+  loadCommentsButtonElement.classList.toggle('hidden', currentCommentsLoaded >= totalComments);
 }
 
-function addComment(comment) {
-  const {avatar, name, commentsList} = comment;
+function addComment({avatar, name, commentsList}) {
   const newCommentElement = commentTemplateElement.cloneNode(true);
   const commentPictureElement = newCommentElement.querySelector('.social__picture');
 
@@ -50,23 +49,11 @@ function addComment(comment) {
   socialCommentsElement.appendChild(newCommentElement);
 }
 
-function updateCommentCounters() {
-  currentCommentsCountElement.textContent = currentCommentsLoaded;
-  totalCommentsCountElement.textContent = totalComments;
-}
-
 function addCommentAndUpdateCounter(comment) {
   addComment(comment);
   currentCommentsLoaded++;
-  updateCommentCounters();
-}
-
-function updateLoadCommentsButtonVisibility() {
-  if (currentCommentsLoaded >= totalComments) {
-    loadCommentsButtonElement.classList.add('hidden');
-  } else {
-    loadCommentsButtonElement.classList.remove('hidden');
-  }
+  currentCommentsCountElement.textContent = currentCommentsLoaded;
+  totalCommentsCountElement.textContent = totalComments;
 }
 
 export {fillCommentsList, loadMoreComments};

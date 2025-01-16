@@ -17,7 +17,7 @@ function generateUniqueInteger(getRandomInt, min, max) {
 function getRandomArrayElements(array, getRandomInt, maxLength = 1) {
   const elements = [];
   for (let i = 0; i < maxLength; i++) {
-    elements.push(array[getRandomInt(0, array.length)]);
+    elements.push(array[getRandomInt(0, array.length - 1)]);
   }
 
   return elements.join(' ');
