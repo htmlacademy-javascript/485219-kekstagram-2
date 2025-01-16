@@ -1,7 +1,8 @@
-import {fillCommentsList} from './comments-viewer.js';
+import {fillCommentsList, loadMoreComments} from './comments-viewer.js';
 
 const picturesContainerElement = document.querySelector('.pictures');
 const bigPhotoElement = document.querySelector('.big-picture');
+const looadMoreCommentsElement = document.querySelector('.comments-loader');
 
 const bodyElement = document.body;
 let photoData = [];
@@ -9,22 +10,16 @@ let photoData = [];
 picturesContainerElement.addEventListener('click', (evt) => {
   const targetPhotoId = evt.target.closest('.picture');
   const targetPhoto = photoData.find((photo) => photo.photoId === Number(targetPhotoId.dataset.photoId));
-  const {url, description, likes, comments} = targetPhoto;
-
-  bigPhotoElement.querySelector('.social__comment-count').classList.add('hidden');
-  bigPhotoElement.querySelector('.comments-loader').classList.add('hidden');
+  const {url, description, likes} = targetPhoto;
 
   bigPhotoElement.querySelector('.big-picture__img img').setAttribute('src', url);
   bigPhotoElement.querySelector('.likes-count').textContent = likes;
-  bigPhotoElement.querySelector('.social__comment-total-count').textContent = comments.length;
   bigPhotoElement.querySelector('.social__caption').textContent = description;
 
   bigPhotoElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
 
   fillCommentsList(targetPhoto.comments);
-
-  bigPhotoElement.querySelector('.social__comment-shown-count').textContent = comments.length;
 
   bigPhotoElement.setAttribute('tabindex', '0');
   bigPhotoElement.focus();
@@ -40,6 +35,10 @@ bigPhotoElement.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
     closeBigPhoto();
   }
+});
+
+looadMoreCommentsElement.addEventListener('click', () => {
+  loadMoreComments();
 });
 
 function closeBigPhoto() {
