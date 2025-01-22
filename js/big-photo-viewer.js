@@ -9,6 +9,10 @@ let photoData = [];
 
 picturesContainerElement.addEventListener('click', (evt) => {
   const targetPhotoId = evt.target.closest('.picture');
+  if(!targetPhotoId) {
+    return;
+  }
+
   const targetPhoto = photoData.find((photo) => photo.photoId === Number(targetPhotoId.dataset.photoId));
   const {url, description, likes} = targetPhoto;
 
