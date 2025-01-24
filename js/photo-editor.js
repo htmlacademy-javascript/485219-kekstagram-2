@@ -1,49 +1,25 @@
+import {validateHashtag} from './hashtag-field-validator.js';
+import {validateComment} from './comment-field-validator.js';
+
 const formElement = document.querySelector('.img-upload__form');
 const uploadInputElement = formElement.querySelector('#upload-file');
 const editPhotoFormElement = formElement.querySelector('.img-upload__overlay');
 const closeButtonElement = formElement.querySelector('.img-upload__cancel');
+const hashtagInputElement = formElement.querySelector('.text__hashtags');
+const commentInputElement = formElement.querySelector('.text__description');
 const bodyElement = document.body;
 
 const pristine = new Pristine(formElement);
-
-function validateHashtag(value) {
-  if (!value.trim()) {
-    return true;
-  }
-
-  const hashtags = value.trim().split(/\s+/);
-  const hashtagPattern = /^#[a-zа-яё0-9]{1,19}$/i;
-
-  if (hashtags.length > 5) {
-    return false;
-  }
-
-  hashtags.forEach((hashtag) => {
-    if (!hashtagPattern.test(hashtag)) {
-      return false;
-    }
-  });
-
-  const lowerCaseHashtags = hashtags.map((tag) => tag.toLowerCase());
-  const uniqueHashtags = new Set(lowerCaseHashtags);
-  if (uniqueHashtags.size !== hashtags.length) {
-    return false;
-  }
-
-  return true;
-}
-
-pristine.addValidator(formElement.querySelector('.text__hashtags'), validateHashtag);
+pristine.addValidator(hashtagInputElement, validateHashtag);
+pristine.addValidator(commentInputElement, validateComment);
 
 formElement.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-
   const isValid = pristine.validate();
 
   if (isValid) {
-    console.log('Можно отправлять');
+    formElement.submit();
   } else {
-    console.log('Форма невалидна');
+    evt.preventDefault();
   }
 });
 
@@ -65,6 +41,20 @@ editPhotoFormElement.addEventListener('keydown', (evt) => {
     closeModal();
   }
 });
+
+hashtagInputElement.addEventListener('keydown', (evt) => {
+  preventCloseOnEsc(evt);
+});
+
+commentInputElement.addEventListener('keydown', (evt) => {
+  preventCloseOnEsc(evt);
+});
+
+function preventCloseOnEsc(evt) {
+  if (evt.key === 'Escape') {
+    evt.stopPropagation();
+  }
+}
 
 function closeModal() {
   editPhotoFormElement.classList.add('hidden');
