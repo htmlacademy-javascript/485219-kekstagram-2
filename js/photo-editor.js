@@ -1,4 +1,4 @@
-import {validateHashtag} from './hashtag-field-validator.js';
+import {validateHashtag, error} from './hashtag-field-validator.js';
 import {validateComment} from './comment-field-validator.js';
 
 const formElement = document.querySelector('.img-upload__form');
@@ -7,20 +7,24 @@ const editPhotoFormElement = formElement.querySelector('.img-upload__overlay');
 const closeButtonElement = formElement.querySelector('.img-upload__cancel');
 const hashtagInputElement = formElement.querySelector('.text__hashtags');
 const commentInputElement = formElement.querySelector('.text__description');
+const publishButtonElement = formElement.querySelector('.img-upload__submit');
 const bodyElement = document.body;
 
-const pristine = new Pristine(formElement);
-pristine.addValidator(hashtagInputElement, validateHashtag);
-pristine.addValidator(commentInputElement, validateComment);
+const pristine = new Pristine(formElement, {
+  classTo: 'img-upload__field-wrapper',
+  errorTextParent: 'img-upload__field-wrapper',
+  errorTextClass: 'text-error'
+});
 
-formElement.addEventListener('submit', (evt) => {
-  const isValid = pristine.validate();
+pristine.addValidator(hashtagInputElement, validateHashtag, error);
+pristine.addValidator(commentInputElement, validateComment, 'превышено количество символов');
 
-  if (isValid) {
-    formElement.submit();
-  } else {
-    evt.preventDefault();
-  }
+hashtagInputElement.addEventListener('input', () => {
+  toggleSubmitButton();
+});
+
+commentInputElement.addEventListener('input', () => {
+  toggleSubmitButton();
 });
 
 uploadInputElement.addEventListener('change', () => {
@@ -60,4 +64,8 @@ function closeModal() {
   editPhotoFormElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   formElement.reset();
+}
+
+function toggleSubmitButton() {
+  publishButtonElement.disabled = !pristine.validate();
 }

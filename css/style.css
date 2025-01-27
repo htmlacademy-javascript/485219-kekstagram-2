@@ -1429,3 +1429,14 @@ main {
 .hidden {
   display: none;
 }
+
+/* Pristine JS
+   ========================================================================== */
+.text-error {
+  color: red;
+  position: relative;
+  top: -10px;
+  font-size: 12px;
+  border: 3px solid red;
+  background-color: black;
+}
