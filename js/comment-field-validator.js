@@ -2,14 +2,10 @@ const COMMENT_LENGTH = 140;
 
 function validateComment(value) {
   if (!value.trim()) {
-    return false;
+    return true;
   }
 
-  if (value.length > COMMENT_LENGTH) {
-    return false;
-  }
-
-  return true;
+  return value.length <= COMMENT_LENGTH;
 }
 
 export {validateComment};
