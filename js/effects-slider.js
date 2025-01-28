@@ -1,7 +1,7 @@
 const effectSliderElement = document.querySelector('.effect-level__slider');
 const effectsListElement = document.querySelector('.effects__list');
 const sliderContainerElement = document.querySelector('.img-upload__effect-level');
-const photoPrevievElement = document.querySelector('.img-upload__preview');
+const photoPreviewElement = document.querySelector('.img-upload__preview');
 
 let isVisibleSlider;
 
@@ -70,7 +70,7 @@ effectsListElement.addEventListener('click', (evt) => {
 
   if (effect === 'none') {
     hideSlider();
-    photoPrevievElement.style.filter = '';
+    photoPreviewElement.style.removeProperty('filter');
     return;
   }
 
@@ -89,7 +89,7 @@ effectsListElement.addEventListener('click', (evt) => {
 
   effectSliderElement.noUiSlider.on('update', () => {
     const value = effectSliderElement.noUiSlider.get(true).toFixed(1);
-    photoPrevievElement.style.filter = effectsConfig[effect].filter(value);
+    photoPreviewElement.style.setProperty('filter', effectsConfig[effect].filter(value));
   });
 });
 

@@ -95,13 +95,17 @@ function closeModal() {
 }
 
 function toggleSubmitButton() {
-  publishButtonElement.disabled = !pristine.validate();
+  if (!pristine.validate()) {
+    publishButtonElement.setAttribute('disabled', 'true');
+  } else {
+    publishButtonElement.removeAttribute('disabled');
+  }
 }
 
 function setImageScale(newValue) {
-  imageElement.style.transform = `scale(${newValue})`;
+  imageElement.style.setProperty('scale', newValue);
 }
 
 function updateScaleValue(newValue) {
-  scaleValueElement.value = `${newValue * 100}%`;
+  scaleValueElement.setAttribute('value', newValue);
 }
