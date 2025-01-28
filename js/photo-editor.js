@@ -30,7 +30,6 @@ const pristine = new Pristine(formElement, {
 
 pristine.addValidator(hashtagInputElement, validateHashtag, error);
 pristine.addValidator(commentInputElement, validateComment, 'превышено количество символов');
-
 hashtagInputElement.addEventListener('input', () => {
   toggleSubmitButton();
 });
