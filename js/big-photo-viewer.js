@@ -22,8 +22,6 @@ picturesContainerElement.addEventListener('click', (evt) => {
 
   bigPhotoElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
-
-  console.log(targetPhoto.comments);
   fillCommentsList(targetPhoto.comments);
 
   bigPhotoElement.setAttribute('tabindex', '0');
