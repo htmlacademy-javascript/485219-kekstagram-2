@@ -13,7 +13,7 @@ picturesContainerElement.addEventListener('click', (evt) => {
     return;
   }
 
-  const targetPhoto = photoData.find((photo) => photo.photoId === Number(targetPhotoId.dataset.photoId));
+  const targetPhoto = photoData.find((photo) => photo.id === Number(targetPhotoId.dataset.id));
   const {url, description, likes} = targetPhoto;
 
   bigPhotoElement.querySelector('.big-picture__img img').setAttribute('src', url);
@@ -23,6 +23,7 @@ picturesContainerElement.addEventListener('click', (evt) => {
   bigPhotoElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
 
+  console.log(targetPhoto.comments);
   fillCommentsList(targetPhoto.comments);
 
   bigPhotoElement.setAttribute('tabindex', '0');

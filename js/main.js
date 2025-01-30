@@ -1,9 +1,16 @@
-import {getPhotoData} from './data.js';
 import {showThumbnail} from './thumbnails.js';
 import {setPhotoData} from './big-photo-viewer.js';
+import {getData} from './api.js';
+import {showDataError} from './notifications.js';
 
-const photoData = getPhotoData(26);
+fetchData();
 
-showThumbnail(photoData);
-setPhotoData(photoData);
-
+async function fetchData() {
+  try {
+    const photoData = await getData();
+    showThumbnail(photoData);
+    setPhotoData(photoData);
+  } catch {
+    showDataError();
+  }
+}

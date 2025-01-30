@@ -4,11 +4,11 @@ const picturesContainer = document.querySelector('.pictures');
 function showThumbnail(photoData) {
   const fragment = document.createDocumentFragment();
 
-  photoData.forEach(({photoId ,url, description, likes, comments }) => {
+  photoData.forEach(({id ,url, description, likes, comments }) => {
     const pictureElement = pictureTemplateElement.cloneNode(true);
     const pictureImgElement = pictureElement.querySelector('.picture__img');
 
-    pictureElement.setAttribute('data-photo-id', photoId);
+    pictureElement.setAttribute('data-id', id);
     pictureImgElement.setAttribute('src', url);
     pictureImgElement.setAttribute('alt', description);
     pictureElement.querySelector('.picture__comments').textContent = comments.length;
