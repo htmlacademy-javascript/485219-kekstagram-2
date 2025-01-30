@@ -24,4 +24,8 @@ function getData() {
   return load(Route.GET_DATA, ErrorText.GET_DATA);
 }
 
-export {getData};
+function sendData(body) {
+  return load(Route.SEND_DATA, Method.POST, body);
+}
+
+export {getData, sendData};
