@@ -1,10 +1,6 @@
 const HASHTAG_MAX_COUNT = 5;
 let errorMessage;
 
-function error() {
-  return errorMessage;
-}
-
 function validateHashtag(value) {
   errorMessage = '';
   if (!value.trim()) {
@@ -36,4 +32,4 @@ function validateHashtag(value) {
   return true;
 }
 
-export { validateHashtag, error };
+export { validateHashtag, errorMessage };
