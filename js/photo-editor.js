@@ -4,6 +4,8 @@ const Scale = {
   MAX: 1
 };
 
+console.log("initialize11111");
+
 const formElement = document.querySelector('.img-upload__form');
 const uploadInputElement = formElement.querySelector('#upload-file');
 const editPhotoFormElement = formElement.querySelector('.img-upload__overlay');
@@ -16,7 +18,7 @@ const scaleValueElement = formElement.querySelector('.scale__control--value');
 const imageElement = formElement.querySelector('.img-upload__preview img');
 const bodyElement = document.body;
 
-let currentScale = Scale.default;
+let currentScale = Scale.DEFAULT;
 
 setImageScale(Scale.DEFAULT);
 
