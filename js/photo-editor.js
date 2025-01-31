@@ -4,8 +4,6 @@ const Scale = {
   MAX: 1
 };
 
-console.log("initialize11111");
-
 const formElement = document.querySelector('.img-upload__form');
 const uploadInputElement = formElement.querySelector('#upload-file');
 const editPhotoFormElement = formElement.querySelector('.img-upload__overlay');
