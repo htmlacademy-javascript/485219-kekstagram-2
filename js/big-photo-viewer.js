@@ -9,12 +9,12 @@ let photoData = [];
 
 picturesContainerElement.addEventListener('click', (evt) => {
   const targetPhotoId = evt.target.closest('.picture');
-  if(!targetPhotoId) {
+  if (!targetPhotoId) {
     return;
   }
 
   const targetPhoto = photoData.find((photo) => photo.id === Number(targetPhotoId.dataset.id));
-  const {url, description, likes} = targetPhoto;
+  const { url, description, likes } = targetPhoto;
 
   bigPhotoElement.querySelector('.big-picture__img img').setAttribute('src', url);
   bigPhotoElement.querySelector('.likes-count').textContent = likes;
@@ -24,15 +24,20 @@ picturesContainerElement.addEventListener('click', (evt) => {
   bodyElement.classList.add('modal-open');
   fillCommentsList(targetPhoto.comments);
 
-  bigPhotoElement.setAttribute('tabindex', '0');
-  bigPhotoElement.focus();
+  document.addEventListener('keydown', onEscapePress); // Добавляем обработчик
 });
 
 bigPhotoElement.addEventListener('click', (evt) => {
-  if(evt.target.closest('.big-picture__cancel')) {
+  if (evt.target.closest('.big-picture__cancel') || evt.target === bigPhotoElement) {
     closeBigPhoto();
   }
 });
+
+function onEscapePress(evt) {
+  if (evt.key === 'Escape') {
+    closeBigPhoto();
+  }
+}
 
 bigPhotoElement.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {

@@ -19,6 +19,8 @@ const biggerButtonElement = formElement.querySelector('.scale__control--bigger')
 const scaleValueElement = formElement.querySelector('.scale__control--value');
 const imageElement = formElement.querySelector('.img-upload__preview img');
 const photoChooserElement = formElement.querySelector('.img-upload__start input[type=file]');
+const effectsPreviewElements = document.querySelectorAll('.effects__preview');
+
 const bodyElement = document.body;
 
 let currentScale = Scale.DEFAULT;
@@ -79,6 +81,9 @@ photoChooserElement.addEventListener('change', () => {
 
   if (matches) {
     imageElement.setAttribute('src', URL.createObjectURL(file));
+    effectsPreviewElements.forEach((preview) => {
+      preview.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
+    });
   }
 });
 
@@ -90,6 +95,7 @@ function preventCloseOnEsc(evt) {
 
 function resetScaleElement() {
   scaleValueElement.setAttribute('value', `${Scale.DEFAULT * 100}%`);
+  currentScale = Scale.DEFAULT;
 }
 
 function closeModal() {
