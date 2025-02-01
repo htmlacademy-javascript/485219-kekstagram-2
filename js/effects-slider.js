@@ -1,7 +1,11 @@
+import {resetScaleElement} from './photo-editor.js';
+
 const effectSliderElement = document.querySelector('.effect-level__slider');
 const effectsListElement = document.querySelector('.effects__list');
 const sliderContainerElement = document.querySelector('.img-upload__effect-level');
-const photoPreviewElement = document.querySelector('.img-upload__preview');
+const sliderInputElement = sliderContainerElement.querySelector('input[type=number]');
+const photoPreviewElement = document.querySelector('.img-upload__preview img');
+const noneEffectElement = effectsListElement.querySelector('#effect-none');
 
 let isVisibleSlider;
 
@@ -68,6 +72,8 @@ effectsListElement.addEventListener('click', (evt) => {
 
   const effect = labelElement.getAttribute('for').replace('effect-', '');
 
+  resetScaleElement();
+
   if (effect === 'none') {
     hideSlider();
     photoPreviewElement.style.removeProperty('filter');
@@ -88,8 +94,9 @@ effectsListElement.addEventListener('click', (evt) => {
   effectSliderElement.noUiSlider.set(effectsConfig[effect].range.max);
 
   effectSliderElement.noUiSlider.on('update', () => {
-    const value = effectSliderElement.noUiSlider.get(true).toFixed(1);
-    photoPreviewElement.style.setProperty('filter', effectsConfig[effect].filter(value));
+    const value = Number(effectSliderElement.noUiSlider.get(true).toFixed(1));
+    photoPreviewElement.setAttribute('style', `filter: ${effectsConfig[effect].filter(value)}`);
+    sliderInputElement.setAttribute('value', value % 1 === 0 ? value.toFixed(0) : value.toFixed(1));
   });
 });
 
@@ -102,5 +109,21 @@ function showSlider() {
   sliderContainerElement.classList.remove('visually-hidden');
   isVisibleSlider = true;
 }
+
+function resetSlider() {
+  hideSlider();
+  photoPreviewElement.style.removeProperty('filter');
+  sliderInputElement.setAttribute('value', '');
+
+  if (noneEffectElement) {
+    noneEffectElement.checked = true;
+  }
+
+  if (effectSliderElement.noUiSlider) {
+    effectSliderElement.noUiSlider.set(0);
+  }
+}
+
+export {resetSlider};
 
 

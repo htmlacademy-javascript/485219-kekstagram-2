@@ -1,4 +1,4 @@
-const ERROR_DISPLAY_TIME = 5000;
+const ERROR_DISPLAY_TIME = 3000;
 
 const bodyElement = document.body;
 const fragmentElement = document.createDocumentFragment();

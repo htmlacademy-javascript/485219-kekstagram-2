@@ -28,6 +28,7 @@ function blockSubmitButton() {
 
 function unblockSubmitButton() {
   publishButtonElement.removeAttribute('disabled');
+  pristine.reset();
 }
 
 function toggleSubmitButton() {

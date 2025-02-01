@@ -1,3 +1,5 @@
+import {resetSlider} from './effects-slider.js';
+
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 const Scale = {
@@ -28,16 +30,19 @@ uploadInputElement.addEventListener('change', () => {
   editPhotoFormElement.setAttribute('tabindex', 0);
   editPhotoFormElement.focus();
 
+  resetScaleElement();
   bodyElement.classList.add('modal-open');
 });
 
 closeButtonElement.addEventListener('click', (evt) => {
   evt.preventDefault();
+  resetSlider();
   closeModal();
 });
 
 editPhotoFormElement.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
+    resetSlider();
     closeModal();
   }
 });
@@ -83,16 +88,23 @@ function preventCloseOnEsc(evt) {
   }
 }
 
+function resetScaleElement() {
+  scaleValueElement.setAttribute('value', `${Scale.DEFAULT * 100}%`);
+}
+
 function closeModal() {
   editPhotoFormElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
+  uploadInputElement.setAttribute('value', '');
   formElement.reset();
 }
 
 function setImageScale(newValue) {
-  imageElement.style.setProperty('scale', newValue);
+  imageElement.setAttribute('style', `transform: scale(${newValue})`);
 }
 
 function updateScaleValue(newValue) {
-  scaleValueElement.setAttribute('value', newValue);
+  scaleValueElement.setAttribute('value', `${newValue * 100}%`);
 }
+
+export {resetScaleElement};
