@@ -64,15 +64,13 @@ const effectsConfig = {
 
 hideSlider();
 
-effectsListElement.addEventListener('click', (evt) => {
-  const labelElement = evt.target.closest('label');
-  if (!labelElement) {
+effectsListElement.addEventListener('change', (evt) => {
+  const inputElement = evt.target.closest('input[type="radio"]');
+  if (!inputElement) {
     return;
   }
 
-  const effect = labelElement.getAttribute('for').replace('effect-', '');
-
-  resetScaleElement();
+  const effect = inputElement.value;
 
   if (effect === 'none') {
     hideSlider();
@@ -95,8 +93,8 @@ effectsListElement.addEventListener('click', (evt) => {
 
   effectSliderElement.noUiSlider.on('update', () => {
     const value = Number(effectSliderElement.noUiSlider.get(true).toFixed(1));
-    photoPreviewElement.setAttribute('style', `filter: ${effectsConfig[effect].filter(value)}`);
-    sliderInputElement.setAttribute('value', value % 1 === 0 ? value.toFixed(0) : value.toFixed(1));
+    photoPreviewElement.style.filter = effectsConfig[effect].filter(value);
+    sliderInputElement.value = value % 1 === 0 ? value.toFixed(0) : value.toFixed(1);
   });
 });
 

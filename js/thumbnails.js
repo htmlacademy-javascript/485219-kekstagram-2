@@ -1,4 +1,4 @@
-import {getRandomArrayElements} from './util.js';
+import {getRandomUniqueArrayElements} from './util.js';
 
 const buttonsFormElement = document.querySelector('.img-filters');
 const filterDefaultButtonElement = buttonsFormElement.querySelector('#filter-default');
@@ -36,7 +36,7 @@ function renderSequentially() {
 function renderRandom() {
   clearPicturesContainer();
 
-  const randomPhotoData = getRandomArrayElements(photoData, 10);
+  const randomPhotoData = getRandomUniqueArrayElements(photoData, 10);
   const fragment = document.createDocumentFragment();
 
   randomPhotoData.forEach(({id, url, description, likes, comments}) => {

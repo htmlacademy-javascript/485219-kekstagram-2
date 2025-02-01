@@ -38,3 +38,5 @@ function toggleSubmitButton() {
     unblockSubmitButton();
   }
 }
+
+export {pristine};

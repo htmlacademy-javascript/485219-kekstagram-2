@@ -1,4 +1,5 @@
 import {resetSlider} from './effects-slider.js';
+import {pristine} from './validator.js';
 
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
@@ -103,6 +104,7 @@ function closeModal() {
   bodyElement.classList.remove('modal-open');
   uploadInputElement.setAttribute('value', '');
   formElement.reset();
+  pristine.reset();
 }
 
 function setImageScale(newValue) {
