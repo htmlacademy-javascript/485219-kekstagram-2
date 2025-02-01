@@ -1,5 +1,3 @@
-import {resetScaleElement} from './photo-editor.js';
-
 const effectSliderElement = document.querySelector('.effect-level__slider');
 const effectsListElement = document.querySelector('.effects__list');
 const sliderContainerElement = document.querySelector('.img-upload__effect-level');
