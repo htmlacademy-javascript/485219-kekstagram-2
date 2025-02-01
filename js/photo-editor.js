@@ -1,3 +1,5 @@
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+
 const Scale = {
   DEFAULT: 1,
   STEP: 0.25,
@@ -14,6 +16,7 @@ const smallerButtonElement = formElement.querySelector('.scale__control--smaller
 const biggerButtonElement = formElement.querySelector('.scale__control--bigger');
 const scaleValueElement = formElement.querySelector('.scale__control--value');
 const imageElement = formElement.querySelector('.img-upload__preview img');
+const photoChooserElement = formElement.querySelector('.img-upload__start input[type=file]');
 const bodyElement = document.body;
 
 let currentScale = Scale.DEFAULT;
@@ -60,6 +63,17 @@ biggerButtonElement.addEventListener('click', () => {
     currentScale += Scale.STEP;
     setImageScale(currentScale);
     updateScaleValue(currentScale);
+  }
+});
+
+photoChooserElement.addEventListener('change', () => {
+  const file = photoChooserElement.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  if (matches) {
+    imageElement.setAttribute('src', URL.createObjectURL(file));
   }
 });
 
