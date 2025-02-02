@@ -1,4 +1,4 @@
-import {addComment} from './comments-renderer.js';
+import { addComment } from './comments-renderer.js';
 
 const socialCommentsElement = document.querySelector('.social__comments');
 const bigPictureElement = document.querySelector('.big-picture');
@@ -11,7 +11,15 @@ let commentsArray = [];
 let totalComments;
 let currentCommentsLoaded = 0;
 
-function fillCommentsList(comments) {
+const addCommentAndUpdateCounter = (comment) => {
+  addComment(comment, socialCommentsElement);
+
+  currentCommentsLoaded++;
+  currentCommentsCountElement.textContent = currentCommentsLoaded;
+  totalCommentsCountElement.textContent = totalComments;
+};
+
+const fillCommentsList = (comments) => {
   socialCommentsElement.innerHTML = '';
 
   if (comments.length > 0) {
@@ -29,23 +37,15 @@ function fillCommentsList(comments) {
     loadCommentElement.textContent = 'Нет комментариев';
     loadCommentsButtonElement.classList.toggle('hidden', currentCommentsLoaded >= totalComments);
   }
-}
+};
 
-function loadMoreComments() {
+const loadMoreComments = () => {
   const commentsToLoad = Math.min(LOADING_STEP, totalComments - currentCommentsLoaded);
 
   for (let i = 0; i < commentsToLoad; i++) {
     addCommentAndUpdateCounter(commentsArray[currentCommentsLoaded]);
   }
   loadCommentsButtonElement.classList.toggle('hidden', currentCommentsLoaded >= totalComments);
-}
+};
 
-function addCommentAndUpdateCounter(comment) {
-  addComment(comment, socialCommentsElement);
-
-  currentCommentsLoaded++;
-  currentCommentsCountElement.textContent = currentCommentsLoaded;
-  totalCommentsCountElement.textContent = totalComments;
-}
-
-export {fillCommentsList, loadMoreComments};
+export { fillCommentsList, loadMoreComments };

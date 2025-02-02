@@ -1,4 +1,4 @@
-function getRandomUniqueArrayElements(array, maxLength) {
+const getRandomUniqueArrayElements = (array, maxLength) => {
   if (maxLength > array.length) {
     throw new Error('maxLength не может быть больше длины массива');
   }
@@ -9,15 +9,14 @@ function getRandomUniqueArrayElements(array, maxLength) {
   }
 
   return [...uniqueElements];
-}
+};
 
-function getRandomInteger(min, max) {
+const getRandomInteger = (min, max) => {
   const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
   const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
   const result = Math.random() * (upper - lower + 1) + lower;
 
-  const floorResult = Math.floor(result);
-  return floorResult;
-}
+  return Math.floor(result);
+};
 
-export {getRandomInteger, getRandomUniqueArrayElements};
+export { getRandomInteger, getRandomUniqueArrayElements };

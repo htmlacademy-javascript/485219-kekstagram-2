@@ -15,17 +15,13 @@ const ErrorText = {
   [Method.POST]: 'Не удалось отправить данные формы'
 };
 
-async function load(route, method = Method.GET, body = null) {
-  const response = await fetch(`${BASE_URL}${route}`, {method, body});
+const load = async (route, method = Method.GET, body = null) => {
+  const response = await fetch(`${BASE_URL}${route}`, { method, body });
   return response.ok ? await response.json() : Promise.reject(ErrorText[method]);
-}
+};
 
-function getData() {
-  return load(Route.GET_DATA, ErrorText.GET_DATA);
-}
+const getData = () => load(Route.GET_DATA, Method.GET);
 
-function sendData(body) {
-  return load(Route.SEND_DATA, Method.POST, body);
-}
+const sendData = (body) => load(Route.SEND_DATA, Method.POST, body);
 
-export {getData, sendData};
+export { getData, sendData };

@@ -1,11 +1,5 @@
 const COMMENT_LENGTH = 140;
 
-function validateComment(value) {
-  if (!value.trim()) {
-    return true;
-  }
+const validateComment = (value) => !value.trim() || value.length <= COMMENT_LENGTH;
 
-  return value.length <= COMMENT_LENGTH;
-}
-
-export {validateComment};
+export { validateComment };

@@ -1,6 +1,6 @@
 const commentTemplateElement = document.querySelector('.social__comment');
 
-function addComment({avatar, name, message}, socialCommentsElement) {
+const addComment = ({ avatar, name, message }, socialCommentsElement) => {
   const newCommentElement = commentTemplateElement.cloneNode(true);
   const commentPictureElement = newCommentElement.querySelector('.social__picture');
 
@@ -8,6 +8,6 @@ function addComment({avatar, name, message}, socialCommentsElement) {
   commentPictureElement.setAttribute('alt', name);
   newCommentElement.querySelector('.social__text').textContent = message;
   socialCommentsElement.appendChild(newCommentElement);
-}
+};
 
-export {addComment};
+export { addComment };

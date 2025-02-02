@@ -13,50 +13,59 @@ const effectsConfig = {
     start: [1],
     step: 0.1,
     connect: [true, false],
-    range: {
-      'min': [0],
-      'max': [1]
-    }
+    range: { min: [0], max: [1] }
   },
   sepia: {
     filter: (value) => `sepia(${value})`,
     start: [1],
     step: 0.1,
     connect: [true, false],
-    range: {
-      'min': [0],
-      'max': [1]
-    }
+    range: { min: [0], max: [1] }
   },
   marvin: {
     filter: (value) => `invert(${value}%)`,
     start: [100],
     step: 1,
     connect: [true, false],
-    range: {
-      'min': [0],
-      'max': [100]
-    }
+    range: { min: [0], max: [100] }
   },
   phobos: {
     filter: (value) => `blur(${value}px)`,
     start: [3],
     step: 0.1,
     connect: [true, false],
-    range: {
-      'min': [0],
-      'max': [3]
-    }
+    range: { min: [0], max: [3] }
   },
   heat: {
     filter: (value) => `brightness(${value})`,
     start: [3],
     step: 0.1,
     connect: [true, false],
-    range: {
-      'min': [1],
-      'max': [3]
-    }
+    range: { min: [1], max: [3] }
+  }
+};
+
+const hideSlider = () => {
+  sliderContainerElement.classList.add('visually-hidden');
+  isVisibleSlider = false;
+};
+
+const showSlider = () => {
+  sliderContainerElement.classList.remove('visually-hidden');
+  isVisibleSlider = true;
+};
+
+const resetSlider = () => {
+  hideSlider();
+  photoPreviewElement.style.removeProperty('filter');
+  sliderInputElement.setAttribute('value', '');
+
+  if (noneEffectElement) {
+    noneEffectElement.checked = true;
+  }
+
+  if (effectSliderElement.noUiSlider) {
+    effectSliderElement.noUiSlider.set(0);
   }
 };
 
@@ -96,30 +105,4 @@ effectsListElement.addEventListener('change', (evt) => {
   });
 });
 
-function hideSlider() {
-  sliderContainerElement.classList.add('visually-hidden');
-  isVisibleSlider = false;
-}
-
-function showSlider() {
-  sliderContainerElement.classList.remove('visually-hidden');
-  isVisibleSlider = true;
-}
-
-function resetSlider() {
-  hideSlider();
-  photoPreviewElement.style.removeProperty('filter');
-  sliderInputElement.setAttribute('value', '');
-
-  if (noneEffectElement) {
-    noneEffectElement.checked = true;
-  }
-
-  if (effectSliderElement.noUiSlider) {
-    effectSliderElement.noUiSlider.set(0);
-  }
-}
-
-export {resetSlider};
-
-
+export { resetSlider };
