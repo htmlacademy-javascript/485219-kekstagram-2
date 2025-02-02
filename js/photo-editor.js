@@ -1,3 +1,6 @@
+import { resetSlider } from './effects-slider.js';
+import { pristine } from './validator.js';
+
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 const Scale = {
@@ -17,38 +20,64 @@ const biggerButtonElement = formElement.querySelector('.scale__control--bigger')
 const scaleValueElement = formElement.querySelector('.scale__control--value');
 const imageElement = formElement.querySelector('.img-upload__preview img');
 const photoChooserElement = formElement.querySelector('.img-upload__start input[type=file]');
+const effectsPreviewElements = document.querySelectorAll('.effects__preview');
+
 const bodyElement = document.body;
 
 let currentScale = Scale.DEFAULT;
 
-setImageScale(Scale.DEFAULT);
+const resetScaleElement = () => {
+  scaleValueElement.setAttribute('value', `${Scale.DEFAULT * 100}%`);
+  currentScale = Scale.DEFAULT;
+};
 
 uploadInputElement.addEventListener('change', () => {
   editPhotoFormElement.classList.remove('hidden');
   editPhotoFormElement.setAttribute('tabindex', 0);
   editPhotoFormElement.focus();
 
+  resetScaleElement();
   bodyElement.classList.add('modal-open');
 });
 
+const closeModal = () => {
+  editPhotoFormElement.classList.add('hidden');
+  bodyElement.classList.remove('modal-open');
+  uploadInputElement.setAttribute('value', '');
+  formElement.reset();
+  pristine.reset();
+};
+
 closeButtonElement.addEventListener('click', (evt) => {
   evt.preventDefault();
+  resetSlider();
   closeModal();
 });
 
 editPhotoFormElement.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
+    resetSlider();
     closeModal();
   }
 });
 
-hashtagInputElement.addEventListener('keydown', (evt) => {
-  preventCloseOnEsc(evt);
-});
+const preventCloseOnEsc = (evt) => {
+  if (evt.key === 'Escape') {
+    evt.stopPropagation();
+  }
+};
 
-commentInputElement.addEventListener('keydown', (evt) => {
-  preventCloseOnEsc(evt);
-});
+const setImageScale = (newValue) => {
+  imageElement.setAttribute('style', `transform: scale(${newValue})`);
+};
+
+const updateScaleValue = (newValue) => {
+  scaleValueElement.setAttribute('value', `${newValue * 100}%`);
+};
+
+hashtagInputElement.addEventListener('keydown', preventCloseOnEsc);
+
+commentInputElement.addEventListener('keydown', preventCloseOnEsc);
 
 smallerButtonElement.addEventListener('click', () => {
   if (currentScale > Scale.STEP) {
@@ -74,25 +103,12 @@ photoChooserElement.addEventListener('change', () => {
 
   if (matches) {
     imageElement.setAttribute('src', URL.createObjectURL(file));
+    effectsPreviewElements.forEach((preview) => {
+      preview.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
+    });
   }
 });
 
-function preventCloseOnEsc(evt) {
-  if (evt.key === 'Escape') {
-    evt.stopPropagation();
-  }
-}
+setImageScale(Scale.DEFAULT);
 
-function closeModal() {
-  editPhotoFormElement.classList.add('hidden');
-  bodyElement.classList.remove('modal-open');
-  formElement.reset();
-}
-
-function setImageScale(newValue) {
-  imageElement.style.setProperty('scale', newValue);
-}
-
-function updateScaleValue(newValue) {
-  scaleValueElement.setAttribute('value', newValue);
-}
+export { resetScaleElement };

@@ -1,7 +1,7 @@
 const HASHTAG_MAX_COUNT = 5;
 let errorMessage;
 
-function validateHashtag(value) {
+const validateHashtag = (value) => {
   errorMessage = '';
   if (!value.trim()) {
     return true;
@@ -23,13 +23,12 @@ function validateHashtag(value) {
   }
 
   const lowerCaseHashtags = hashtags.map((tag) => tag.toLowerCase());
-  const uniqueHashtags = new Set(lowerCaseHashtags);
-  if (uniqueHashtags.size !== hashtags.length) {
+  if (new Set(lowerCaseHashtags).size !== hashtags.length) {
     errorMessage = 'Хэштеги не должны повторяться';
     return false;
   }
 
   return true;
-}
+};
 
 export { validateHashtag, errorMessage };

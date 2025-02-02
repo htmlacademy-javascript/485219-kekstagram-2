@@ -1,10 +1,12 @@
-import {sendData} from './api.js';
-import {showSuccess, showUploadError} from './notifications.js';
+import { sendData } from './api.js';
+import { showSuccess, showUploadError } from './notifications.js';
 
+const bodyElement = document.body;
+const bigPhotoElement = document.querySelector('.big-picture');
 const formElement = document.querySelector('.img-upload__form');
 const publishButtonElement = formElement.querySelector('.img-upload__submit');
 
-formElement.addEventListener('submit', async (evt) => {
+const handleFormSubmit = async (evt) => {
   evt.preventDefault();
 
   publishButtonElement.setAttribute('disabled', 'true');
@@ -14,9 +16,13 @@ formElement.addEventListener('submit', async (evt) => {
     await sendData(formData);
     showSuccess();
     formElement.reset();
+    bigPhotoElement.classList.add('hidden');
+    bodyElement.classList.remove('modal-open');
   } catch (error) {
     showUploadError();
   }
 
   publishButtonElement.removeAttribute('disabled');
-});
+};
+
+formElement.addEventListener('submit', handleFormSubmit);

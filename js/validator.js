@@ -1,5 +1,5 @@
-import {errorMessage, validateHashtag} from './hashtag-field-validator.js';
-import {validateComment} from './comment-field-validator.js';
+import { errorMessage, validateHashtag } from './hashtag-field-validator.js';
+import { validateComment } from './comment-field-validator.js';
 
 const formElement = document.querySelector('.img-upload__form');
 const hashtagInputElement = formElement.querySelector('.text__hashtags');
@@ -14,26 +14,23 @@ const pristine = new Pristine(formElement, {
 
 pristine.addValidator(hashtagInputElement, validateHashtag, () => errorMessage);
 pristine.addValidator(commentInputElement, validateComment, 'превышено количество символов');
-hashtagInputElement.addEventListener('input', () => {
-  toggleSubmitButton();
-});
 
-commentInputElement.addEventListener('input', () => {
-  toggleSubmitButton();
-});
+const blockSubmitButton = () => publishButtonElement.setAttribute('disabled', 'true');
 
-function blockSubmitButton() {
-  publishButtonElement.setAttribute('disabled', 'true');
-}
-
-function unblockSubmitButton() {
+const unblockSubmitButton = () => {
   publishButtonElement.removeAttribute('disabled');
-}
+  pristine.reset();
+};
 
-function toggleSubmitButton() {
+const toggleSubmitButton = () => {
   if (!pristine.validate()) {
     blockSubmitButton();
   } else {
     unblockSubmitButton();
   }
-}
+};
+
+hashtagInputElement.addEventListener('input', toggleSubmitButton);
+commentInputElement.addEventListener('input', toggleSubmitButton);
+
+export { pristine };

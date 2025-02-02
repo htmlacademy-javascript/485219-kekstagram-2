@@ -1,20 +1,34 @@
-import {fillCommentsList, loadMoreComments} from './comments-viewer.js';
+import { fillCommentsList, loadMoreComments } from './comments-viewer.js';
 
 const picturesContainerElement = document.querySelector('.pictures');
 const bigPhotoElement = document.querySelector('.big-picture');
-const looadMoreCommentsElement = document.querySelector('.comments-loader');
-
+const loadMoreCommentsElement = document.querySelector('.comments-loader');
 const bodyElement = document.body;
 let photoData = [];
 
+const closeBigPhoto = () => {
+  bigPhotoElement.classList.add('hidden');
+  bodyElement.classList.remove('modal-open');
+};
+
+const onEscapePress = (evt) => {
+  if (evt.key === 'Escape') {
+    closeBigPhoto();
+  }
+};
+
 picturesContainerElement.addEventListener('click', (evt) => {
   const targetPhotoId = evt.target.closest('.picture');
-  if(!targetPhotoId) {
+  if (!targetPhotoId) {
     return;
   }
 
   const targetPhoto = photoData.find((photo) => photo.id === Number(targetPhotoId.dataset.id));
-  const {url, description, likes} = targetPhoto;
+  if (!targetPhoto) {
+    return;
+  }
+
+  const { url, description, likes } = targetPhoto;
 
   bigPhotoElement.querySelector('.big-picture__img img').setAttribute('src', url);
   bigPhotoElement.querySelector('.likes-count').textContent = likes;
@@ -24,35 +38,23 @@ picturesContainerElement.addEventListener('click', (evt) => {
   bodyElement.classList.add('modal-open');
   fillCommentsList(targetPhoto.comments);
 
-  bigPhotoElement.setAttribute('tabindex', '0');
-  bigPhotoElement.focus();
+  document.addEventListener('keydown', onEscapePress);
 });
 
 bigPhotoElement.addEventListener('click', (evt) => {
-  if(evt.target.closest('.big-picture__cancel')) {
+  if (evt.target.closest('.big-picture__cancel') || evt.target === bigPhotoElement) {
     closeBigPhoto();
   }
 });
 
-bigPhotoElement.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
-    closeBigPhoto();
-  }
-});
+bigPhotoElement.addEventListener('keydown', onEscapePress);
 
-looadMoreCommentsElement.addEventListener('click', () => {
-  loadMoreComments();
-});
+loadMoreCommentsElement.addEventListener('click', loadMoreComments);
 
-function closeBigPhoto() {
-  bigPhotoElement.classList.add('hidden');
-  bodyElement.classList.remove('modal-open');
-}
-
-function setPhotoData(data) {
+const setPhotoData = (data) => {
   photoData = data;
-}
+};
 
-export {setPhotoData};
+export { setPhotoData };
 
 
