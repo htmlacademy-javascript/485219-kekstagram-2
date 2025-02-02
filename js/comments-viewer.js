@@ -1,12 +1,14 @@
 import { addComment } from './comments-renderer.js';
 
+const LOADING_STEP = 5;
+
 const socialCommentsElement = document.querySelector('.social__comments');
 const bigPictureElement = document.querySelector('.big-picture');
 const loadCommentElement = bigPictureElement.querySelector('.social__comment-count');
 const currentCommentsCountElement = bigPictureElement.querySelector('.social__comment-shown-count');
 const totalCommentsCountElement = bigPictureElement.querySelector('.social__comment-total-count');
 const loadCommentsButtonElement = bigPictureElement.querySelector('.social__comments-loader');
-const LOADING_STEP = 5;
+
 let commentsArray = [];
 let totalComments;
 let currentCommentsLoaded = 0;

@@ -6,6 +6,7 @@ const filterRandomButtonElement = buttonsFormElement.querySelector('#filter-rand
 const filterDiscussedButtonElement = buttonsFormElement.querySelector('#filter-discussed');
 const pictureTemplateElement = document.querySelector('#picture').content.querySelector('.picture');
 const picturesContainer = document.querySelector('.pictures');
+
 let photoData = [];
 
 const fillPhotoElement = (pictureElement, id, pictureImgElement, url, description, comments, likes) => {

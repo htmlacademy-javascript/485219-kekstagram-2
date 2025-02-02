@@ -1,4 +1,6 @@
-const ERROR_DISPLAY_TIME = 3000;
+import {editPhotoFormElement, closeModal} from './photo-editor.js';
+
+const ERROR_DISPLAY_TIME = 4000;
 
 const bodyElement = document.body;
 const fragmentElement = document.createDocumentFragment();
@@ -31,17 +33,20 @@ const closeMessageBox = (element, onEscClick, onOverlayClick) => {
 const onEscCloseMessage = (evt, element, onEscClick, onOverlayClick) => {
   if (evt.key === 'Escape') {
     closeMessageBox(element, onEscClick, onOverlayClick);
+    editPhotoFormElement.focus();
   }
 };
 
 const onOverlayCloseMessage = (evt, messageBlock, element, onEscClick, onOverlayClick) => {
   if (!messageBlock.contains(evt.target)) {
     closeMessageBox(element, onEscClick, onOverlayClick);
+    editPhotoFormElement.focus();
   }
 };
 
 const onClickCloseMessage = (element, onEscClick, onOverlayClick) => {
   closeMessageBox(element, onEscClick, onOverlayClick);
+  editPhotoFormElement.focus();
 };
 
 
@@ -51,10 +56,12 @@ const showSuccess = () => {
 
   function onEscClick(evt) {
     onEscCloseMessage(evt, successElement, onEscClick, onOverlayClick);
+    closeModal();
   }
 
   function onOverlayClick(evt) {
     onOverlayCloseMessage(evt, successBlockElement, successElement, onEscClick, onOverlayClick);
+    closeModal();
   }
 
   successButtonElement.addEventListener('click', () => onClickCloseMessage(successElement, onEscClick, onOverlayClick));
