@@ -16,6 +16,11 @@ const fillPhotoElement = (pictureElement, id, pictureImgElement, url, descriptio
   pictureElement.querySelector('.picture__likes').textContent = likes;
 };
 
+const clearPicturesContainer = () => {
+  const pictures = picturesContainer.querySelectorAll('.picture');
+  pictures.forEach((picture) => picture.remove());
+};
+
 const renderSequentially = () => {
   clearPicturesContainer();
 
@@ -67,11 +72,6 @@ const renderDiscussed = () => {
   });
 
   picturesContainer.appendChild(fragment);
-};
-
-const clearPicturesContainer = () => {
-  const pictures = picturesContainer.querySelectorAll('.picture');
-  pictures.forEach((picture) => picture.remove());
 };
 
 const showThumbnail = (data) => {

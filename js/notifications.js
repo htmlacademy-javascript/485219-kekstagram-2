@@ -17,7 +17,9 @@ const successBlockElement = successElement.querySelector('.success__inner');
 
 const showOtherUsersDataError = () => {
   bodyElement.append(dataErrorElement);
-  setTimeout(() => dataErrorElement.remove(), ERROR_DISPLAY_TIME);
+  setTimeout(() => {
+    dataErrorElement.remove();
+  }, ERROR_DISPLAY_TIME);
 };
 
 const closeMessageBox = (element, onEscClick, onOverlayClick) => {
@@ -42,12 +44,18 @@ const onClickCloseMessage = (element, onEscClick, onOverlayClick) => {
   closeMessageBox(element, onEscClick, onOverlayClick);
 };
 
+
 const showSuccess = () => {
   fragmentElement.appendChild(successElement);
   bodyElement.append(fragmentElement);
 
-  const onEscClick = (evt) => onEscCloseMessage(evt, successElement, onEscClick, onOverlayClick);
-  const onOverlayClick = (evt) => onOverlayCloseMessage(evt, successBlockElement, successElement, onEscClick, onOverlayClick);
+  function onEscClick(evt) {
+    onEscCloseMessage(evt, successElement, onEscClick, onOverlayClick);
+  }
+
+  function onOverlayClick(evt) {
+    onOverlayCloseMessage(evt, successBlockElement, successElement, onEscClick, onOverlayClick);
+  }
 
   successButtonElement.addEventListener('click', () => onClickCloseMessage(successElement, onEscClick, onOverlayClick));
   document.addEventListener('keydown', onEscClick);
@@ -58,12 +66,17 @@ const showUploadError = () => {
   fragmentElement.appendChild(errorMessageElement);
   bodyElement.append(fragmentElement);
 
-  const onEscClick = (evt) => onEscCloseMessage(evt, errorMessageElement, onEscClick, onOverlayClick);
-  const onOverlayClick = (evt) => onOverlayCloseMessage(evt, errorBlockElement, errorMessageElement, onEscClick, onOverlayClick);
+  function onEscClick(evt) {
+    onEscCloseMessage(evt, errorMessageElement, onEscClick, onOverlayClick);
+  }
+
+  function onOverlayClick(evt) {
+    onOverlayCloseMessage(evt, errorBlockElement, errorMessageElement, onEscClick, onOverlayClick);
+  }
 
   errorButtonElement.addEventListener('click', () => onClickCloseMessage(errorMessageElement, onEscClick, onOverlayClick));
   document.addEventListener('keydown', onEscClick);
   document.addEventListener('click', onOverlayClick);
 };
 
-export { showOtherUsersDataError, showSuccess, showUploadError };
+export {showOtherUsersDataError, showSuccess, showUploadError};
