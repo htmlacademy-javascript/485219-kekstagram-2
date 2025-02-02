@@ -26,17 +26,23 @@ const bodyElement = document.body;
 
 let currentScale = Scale.DEFAULT;
 
+formElement.setAttribute('tabindex', 0);
+
 const resetScaleElement = () => {
   scaleValueElement.setAttribute('value', `${Scale.DEFAULT * 100}%`);
   currentScale = Scale.DEFAULT;
+};
+
+const setImageScale = (newValue) => {
+  imageElement.setAttribute('style', `transform: scale(${newValue})`);
 };
 
 uploadInputElement.addEventListener('change', () => {
   editPhotoFormElement.classList.remove('hidden');
   editPhotoFormElement.setAttribute('tabindex', 0);
   editPhotoFormElement.focus();
-
   resetScaleElement();
+  setImageScale(Scale.DEFAULT);
   bodyElement.classList.add('modal-open');
 });
 
@@ -45,18 +51,18 @@ const closeModal = () => {
   bodyElement.classList.remove('modal-open');
   uploadInputElement.setAttribute('value', '');
   formElement.reset();
+  resetSlider();
+  resetScaleElement();
   pristine.reset();
 };
 
 closeButtonElement.addEventListener('click', (evt) => {
   evt.preventDefault();
-  resetSlider();
   closeModal();
 });
 
 editPhotoFormElement.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
-    resetSlider();
     closeModal();
   }
 });
@@ -65,10 +71,6 @@ const preventCloseOnEsc = (evt) => {
   if (evt.key === 'Escape') {
     evt.stopPropagation();
   }
-};
-
-const setImageScale = (newValue) => {
-  imageElement.setAttribute('style', `transform: scale(${newValue})`);
 };
 
 const updateScaleValue = (newValue) => {
@@ -111,4 +113,4 @@ photoChooserElement.addEventListener('change', () => {
 
 setImageScale(Scale.DEFAULT);
 
-export { resetScaleElement };
+export { resetScaleElement, editPhotoFormElement, closeModal };
