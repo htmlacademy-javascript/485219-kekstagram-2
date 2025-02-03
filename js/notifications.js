@@ -47,6 +47,7 @@ const onOverlayCloseMessage = (evt, messageBlock, element, onEscClick, onOverlay
 const onClickCloseMessage = (element, onEscClick, onOverlayClick) => {
   closeMessageBox(element, onEscClick, onOverlayClick);
   editPhotoFormElement.focus();
+  closeModal();
 };
 
 
@@ -60,13 +61,16 @@ const showSuccess = () => {
   }
 
   function onOverlayClick(evt) {
-    onOverlayCloseMessage(evt, successBlockElement, successElement, onEscClick, onOverlayClick);
-    closeModal();
+    if (!successBlockElement.contains(evt.target)) {
+      closeMessageBox(successElement, onEscClick, onOverlayClick);
+      closeModal();
+    }
   }
 
   successButtonElement.addEventListener('click', () => onClickCloseMessage(successElement, onEscClick, onOverlayClick));
+
+  successElement.addEventListener('click', onOverlayClick);
   document.addEventListener('keydown', onEscClick);
-  document.addEventListener('click', onOverlayClick);
 };
 
 const showUploadError = () => {
